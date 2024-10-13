@@ -10,6 +10,7 @@ Here we have some Xeon Phi Offloading programs for Windows, wrote by myself. The
 - Intel Parallel Studio XE Cluster 2017u8
 - __Intel Xeon Phi x100 Coprocessor 7120P__
 
+![](MyPhiRig.jpg)
 ![](screenshot0.png)
 
 # Examples
