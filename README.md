@@ -10,7 +10,7 @@ Here we have some Xeon Phi Offloading programs for Windows, wrote by myself. The
 - Intel Parallel Studio XE Cluster 2017u8
 - __Intel Xeon Phi x100 Coprocessor 7120P__
 
-![](32R~GCCHN$%S(P{XVL~XBVX.png)
+![](screenshot0.png)
 
 # Examples
 
