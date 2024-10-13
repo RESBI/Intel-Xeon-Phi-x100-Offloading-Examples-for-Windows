@@ -8,6 +8,8 @@ Here we have some Xeon Phi Offloading programs for Windows, wrote by myself. The
 - Visual Studio 2015 Community
 - MPSS 3.8.6
 - Intel Parallel Studio XE Cluster 2017u8
+- Gigabyte B450M 
+- Ryzen R7 2700
 - __Intel Xeon Phi x100 Coprocessor 7120P__
 
 ![](MyPhiRig.jpg)
