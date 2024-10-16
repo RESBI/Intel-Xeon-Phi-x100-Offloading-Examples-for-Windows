@@ -21,13 +21,15 @@ Here we have some Xeon Phi Offloading programs for Windows, wrote by myself. The
 
 Test offload avaliability. 
 
-## Mandelbrot
-
-A program drawing mandelbrot set, support multi Phi calculation. 
-
 ## DataTransmittingTest
 
 Testing data transmitting performance. 
+
+![](DataTransmittingTest/transfer_screenshot_0.jpg)
+
+## Mandelbrot
+
+A program drawing mandelbrot set, support multi Phi calculation. 
 
 ## GameOfLife
 
