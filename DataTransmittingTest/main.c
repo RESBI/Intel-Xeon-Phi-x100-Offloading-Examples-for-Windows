@@ -18,18 +18,31 @@
 #include <offload.h>
 #include <omp.h>
 #include <time.h>
+#ifndef __linux__
+#include <windows.h>
+#endif
 
 /*
 #ifdef __linux__
 #define MALLOC_ALIGNED aligned_alloc
 #else
-
-#define MALLOC_ALIGNED _aligned_malloc
+#define _mm_free(a)      _aligned_free(a)
+#define _mm_malloc(a, b) _aligned_malloc(a, b)
 #endif
 #define ALIGNMENT_SIZE 32
 */
 
 #define SUM_TYPE unsigned int
+
+#define TRANSFER_LOOP_TIMES 10; 
+
+/*
+uint64_t getMicroseconds() {
+    struct timespec time_pointer;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &time_pointer);
+    return (time_pointer.tv_sec * 1000000 + time_pointer.tv_nsec / 1000);
+}
+*/
 
 char *dataGen(unsigned long data_size) {
     //char *data = (char *)MALLOC_ALIGNED(ALIGNMENT_SIZE, sizeof(char) * data_size);
@@ -114,6 +127,7 @@ int main() {
     char *data; 
     SUM_TYPE data_sum;
     int num_coprocs = _Offload_number_of_devices();
+    int transfer_loop_times = TRANSFER_LOOP_TIMES; 
     int sig; 
 
     printf("[HOST] %d Coprocessors detected!\n", num_coprocs); 
@@ -124,21 +138,55 @@ int main() {
     data_sum = getSum(data_size, data);
     printf("[HOST] data sum = %u\n", data_sum);
 
-    for (int card_index = 0; card_index < num_coprocs; card_index++) {
-        printf("[HOST] Transferring data to mic%d...\n", card_index);
+    unsigned long transfer_start_millisecond, transfer_end_millisecond;
+    double transfer_duration_millisecond;
 
+    for (int card_index = 0; card_index < num_coprocs; card_index++) {
+        printf("[MIC%d] Allocating memory space on mic%d...\n", card_index, card_index);
+
+#pragma offload target(mic : card_index) signal(&sig) \
+        in(data : length(data_size) alloc_if(1) free_if(0))
+        {
+        }
+//#pragma offload_wait target(mic : card_index) wait(&sig)
+
+        printf("[HOST] Transferring data to mic%d for %d times...\n", card_index, transfer_loop_times);
+
+        // GetTickCount only works on Windows
+        transfer_start_millisecond = GetTickCount(); 
+        for (int index_transfer_times = 0; index_transfer_times < transfer_loop_times; index_transfer_times++) {
+#pragma offload target(mic : card_index) signal(&sig) \
+        in(data : length(data_size) alloc_if(0) free_if(0))
+            {
+            }
+#pragma offload_wait target(mic : card_index) wait(&sig)
+        }
+        transfer_end_millisecond = GetTickCount();
+        transfer_duration_millisecond = (transfer_end_millisecond - transfer_start_millisecond) / transfer_loop_times; 
+
+        printf("[HOST] Done!\n");
+        printf("[HOST] Cost : %.3f seconds\n", transfer_duration_millisecond / 1000);
+        printf("[HOST] Speed: %.3f MiB/s\n", (data_size / 1024 / 1024) / (transfer_duration_millisecond / 1000));
+
+        printf("[HOST] Now begin checksum on mic%d...\n", card_index); 
+
+        SUM_TYPE temp_data_sum = 0;
 #pragma offload target(mic : card_index) signal(&sig) \
         in(card_index) \
         in(data_size) \
-        in(data : length(data_size))
+        out(temp_data_sum) \
+        in(data : length(data_size) alloc_if(0) free_if(1))
         {
-           printf("[MIC%d] Done! Now checksum...\n", card_index);
-           SUM_TYPE temp_data_sum = 0;
-           printf("[MIC%d] Checking data sum...\n", card_index);
            temp_data_sum = getSum(data_size, data);
            printf("[MIC%d] data sum = %u\n", card_index, temp_data_sum);
         }
 #pragma offload_wait target(mic : card_index) wait(&sig)
+        if (temp_data_sum == data_sum) {
+            printf("[HOST] Datasum agree!\n"); 
+        }
+        else {
+            printf("[HOST] Datasum disagree!\n");
+        }
     }
 
     free(data);
