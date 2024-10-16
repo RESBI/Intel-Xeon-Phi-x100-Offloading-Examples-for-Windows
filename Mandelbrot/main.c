@@ -17,6 +17,10 @@
 #include "utils.h"
 #include "mandelbrot.h"
 
+#ifndef __linux__
+#include <windows.h>
+#endif
+
 int main() {
     // Start your codes here... 
     int num_coprocessors = _Offload_number_of_devices();
@@ -66,6 +70,9 @@ int main() {
     painting_board_b = (char *)malloc(sizeof(char) * size_length);
     //escape_steps = (int *)malloc(sizeof(int) * size_length);
 
+    // Timing
+    unsigned long transfer_start_millisecond, transfer_end_millisecond;
+    double transfer_duration_millisecond;
 
     // Get number of threads of each card
     for (int card_index = 0; card_index < num_coprocessors; card_index++) {
@@ -96,31 +103,40 @@ int main() {
 
     printf("[HOST] Now start calculation...\n"); 
 
+    transfer_start_millisecond = GetTickCount();
+
     mandelbrotDo(
-        size_x,
-        size_y,
-        size_x_half,
-        size_y_half,
-        size_length,
-        pixels_per_identity,
+            size_x,
+            size_y,
+            size_x_half,
+            size_y_half,
+            size_length,
+            pixels_per_identity,
 
-        escape_limit,
-        offset_z_real,
-        offset_z_imag,
+            escape_limit,
+            offset_z_real,
+            offset_z_imag,
 
-        num_coprocessors,
-        total_threads,
-        threads,
+            num_coprocessors,
+            total_threads,
+            threads,
 
-        deliver_begins,
-        deliver_lengths,
+            deliver_begins,
+            deliver_lengths,
 
-        painting_board_r,
-        painting_board_g,
-        painting_board_b
+            painting_board_r,
+            painting_board_g,
+            painting_board_b
         );
 
-    printf("[HOST] Done! Saving picture...\n");
+    transfer_end_millisecond = GetTickCount();
+    transfer_duration_millisecond = transfer_end_millisecond - transfer_start_millisecond; 
+
+    printf("[HOST] Done!\n");
+    printf("[HOST] Cost : %.3f seconds\n", transfer_duration_millisecond / 1000);
+    printf("[HOST] Speed: %.3f Pixels/s\n", size_length / (transfer_duration_millisecond / 1000));
+
+    printf("[HOST] Now saving picture...\n"); 
 
     writeBMP(painting_board_r, painting_board_g, painting_board_b, saving_path, size_y, size_x);
 

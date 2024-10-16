@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <offload.h>
 
 #include "config.h"
@@ -30,28 +31,28 @@ void deliveringTasks(
 
 TARGET_ATTRIBUTE
 char getR(int n, int escape) {
-    return (char)(n * 255 / (16 * escape) + 16);
-    //return (char)(255-(ESCAPE/2*n)*(ESCAPE/2*n));
+    return (char)(n * 255 / escape);
     //return 0;
-    //return (char)(255-n*255/ESCAPE);
-    //return (char)(255-4*atan(n/ESCAPE)/(3.1415926535)*255);
+    //return (char)(255 - 255 * (n / escape - 1) * (n / escape - 1));
+    //return 255 - (char)(4 * atan(n / ESCAPE) / (3.1415926535) * 255);
 }
 
 TARGET_ATTRIBUTE
 char getG(int n, int escape) {
-    //return (char)(255-(ESCAPE/2*(n-ESCAPE/2))*(ESCAPE/2*(n-ESCAPE/2)));
     //return 0;
-    return (char)(n * 255 / (16 * escape) + 16);
-    //return (char)(255-4*atan(n/ESCAPE)/(3.1415926535)*255);
+    //return (char)(n * 255 / (2 * escape));
+    return (char)(n * 255 / escape);
+    //return (char)(255 - 255 * (n / escape - 1) * (n / escape - 1) * (n / escape - 1) * (n / escape - 1));
+    //return 255 - (char)(4 * atan(n / ESCAPE) / (3.1415926535) * 255);
 }
 
 TARGET_ATTRIBUTE
 char getB(int n, int escape) {
-    //return (char)(255-(ESCAPE/2*(n-ESCAPE))*(ESCAPE/2*(n-ESCAPE)));
     //return 0;
-    //return (char)(255-n*255/ESCAPE);
+    //return (char)(255 - n * 255 / escape);
     return (char)(n * 255 / escape);
-    //return (char)(255-4*atan(n/ESCAPE)/(3.1415926535)*255);
+    //return (char)(255 * (n / escape - 1) * (n / escape - 1));
+    //return 255 - (char)(4 * atan(n / ESCAPE) / (3.1415926535) * 255);
 }
 
 void writeBMP(char *R, char *G, char *B, const char* filename, int H, int W) {
@@ -65,9 +66,9 @@ void writeBMP(char *R, char *G, char *B, const char* filename, int H, int W) {
     // Write image
     //fwrite(img, 1, l*H, fp);
     for (int index = 0; index < l * H; index++) {
-        fwrite(&(R[index]), 1, 1, fp);
-        fwrite(&(G[index]), 1, 1, fp);
         fwrite(&(B[index]), 1, 1, fp);
+        fwrite(&(G[index]), 1, 1, fp);
+        fwrite(&(R[index]), 1, 1, fp);
     }
     fclose(fp);
 }

@@ -11,6 +11,10 @@
 #include "mandelbrot.h"
 #include "utils.h"
 
+void mandelbrotPreWorks() {
+
+}
+
 TARGET_ATTRIBUTE
 void mandelbrotDo(
         long long  size_x,
@@ -71,8 +75,8 @@ void mandelbrotDo(
                 int now_x = now_length % size_x;
                 PRECISION z_real = 0; 
                 PRECISION z_imag = 0; 
-                PRECISION c_real = (PRECISION)(now_x - size_x_half) / (PRECISION)pixels_per_identity + offset_z_real;
-                PRECISION c_imag = (PRECISION)(size_y_half - now_y) / (PRECISION)pixels_per_identity + offset_z_imag; // Flip upside down. 
+                PRECISION c_real = (PRECISION)(now_x - size_x_half) / pixels_per_identity + offset_z_real;
+                PRECISION c_imag = (PRECISION)(size_y_half - now_y) / pixels_per_identity + offset_z_imag; // Flip upside down. 
                 PRECISION a, b; 
 
                 while ((escape_steps[task_index] < escape_limit) && (z_real * z_real + z_imag * z_imag < 4)) { 
