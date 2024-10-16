@@ -13,7 +13,6 @@ Here we have some Xeon Phi Offloading programs for Windows, wrote by myself. The
 - __Intel Xeon Phi x100 Coprocessor 7120P__
 
 ![](MyPhiRig.jpg)
-![](screenshot0.png)
 
 # Examples
 
@@ -30,6 +29,8 @@ Testing data transmitting performance.
 ## Mandelbrot
 
 A program drawing mandelbrot set, support multi Phi calculation. 
+
+![](Mandelbrot/mandelbrot_screenshot_0.png)
 
 ## GameOfLife
 
