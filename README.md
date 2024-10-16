@@ -22,7 +22,7 @@ Test offload avaliability.
 
 ## DataTransmittingTest
 
-Testing data transmitting performance. 
+Test data transmitting performance. 
 
 ![](DataTransmittingTest/transfer_screenshot_0.jpg)
 
