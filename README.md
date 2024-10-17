@@ -1,8 +1,8 @@
 # Intel Xeon Phi Offloading Examples (Windows)
 
-Here we have some Xeon Phi Offloading programs for Windows, wrote by myself. The VS template was extracted from official tutorials placed inside the MPSS installation folder. 
+Here we have some Xeon Phi Offloading programs for Windows wrote by myself. The VS template was extracted from official tutorials placed inside the MPSS installation folder. 
 
-Since it's hard to learn how to create an offloading program by reading those official tutorials and broken-piece documentations on the internet<sup>\[[doc.-1~3](https://github.com/RESBI/Intel-Xeon-Phi-x100-Offloading-Examples-for-Windows/tree/main?tab=readme-ov-file#references)\]</sup>, I decided to write some examples __explicitely__ show how to. 
+Since it's hard to learn how to write an offloading program by reading those official tutorials and broken-piece documentations on the internet<sup>\[[doc.-1~3](https://github.com/RESBI/Intel-Xeon-Phi-x100-Offloading-Examples-for-Windows/tree/main?tab=readme-ov-file#references)\]</sup>, I decided to write some examples __explicitely__ show how to. 
 
 # Environment
 
