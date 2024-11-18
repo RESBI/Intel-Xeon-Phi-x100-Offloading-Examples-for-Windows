@@ -51,3 +51,9 @@ Todo...
 - \[doc.2\] [Intel Xeon Phi Coprocessor Quick Start Developers Guide](https://www.intel.com/content/dam/develop/external/us/en/documents/intel-xeon-phi-coprocessor-quick-start-developers-guide.pdf)
 - \[doc.3\] [Introduction to Intel Xeon Phi Programming Techniques](https://indico.ictp.it/event/a14302/session/12/contribution/48/material/0/0.pdf)
 
+# Accept Donation 
+
+| Coin                 | Address                                                                                          |
+| :------------------: | :----------------------------------------------------------------------------------------------: |
+| XMR                  | 8971Aa7Au2b1bBnEwsUR6mbWy5ZxsFA57dq51mxtJxPKAEuLfm1ByutSDrKMPh2iiCYh6xTqpQ5f79SZ2cG2w7oF33hDEui  |
+| BTC/BCH (Main chain) | 18MfJ8JHwRKzaMpkqXrzUQsSer9oiq3oC3                                                               | 
