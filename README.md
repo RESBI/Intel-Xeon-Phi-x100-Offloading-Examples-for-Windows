@@ -10,11 +10,11 @@ Since it's hard to learn how to write an offloading program by reading those off
 - Visual Studio 2015 Community
 - MPSS 3.8.6
 - Intel Parallel Studio XE Cluster 2017u8
-- Gigabyte B450M 
+- MSI B450 GAMING PLUS 
 - Ryzen R7 2700
 - __Intel Xeon Phi x100 Coprocessor 7120P__
 
-![](MyPhiRig.jpg)
+![](MyPhiRig_new.jpg)
 
 # Examples
 
@@ -26,7 +26,7 @@ Test offload avaliability.
 
 Test data transmitting performance. 
 
-![](DataTransmittingTest/transfer_screenshot_0.jpg)
+![](DataTransmittingTest/transfer_screenshot_1.jpg)
 
 ## `Mandelbrot`
 
