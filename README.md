@@ -26,7 +26,7 @@ Test offload avaliability.
 
 Test data transmitting performance. 
 
-![](DataTransmittingTest/transfer_screenshot_1.jpg)
+![](DataTransmittingTest/transfer_screenshot_1.png)
 
 ## `Mandelbrot`
 
