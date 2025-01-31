@@ -11,9 +11,105 @@
 #include "mandelbrot.h"
 #include "utils.h"
 
-void mandelbrotPreWorks() {
+void mandelbrotPreWorks(
+        long long  size_x,
+        long long  size_y,
+        long long  size_x_half,
+        long long  size_y_half,
+        long long  size_length,
+        PRECISION  pixels_per_identity,
 
+        int escape_limit,
+        PRECISION offset_z_real,
+        PRECISION offset_z_imag,
+
+        int num_coprocessors,
+        int total_threads,
+        int *threads,
+
+        long long *deliver_begins,
+        long long *deliver_lengths,
+
+        char *painting_board_r,
+        char *painting_board_g,
+        char *painting_board_b
+    ) {
+
+    int *signals;
+    signals = (int *)malloc(sizeof(int) * num_coprocessors);
+
+    printf("[HOST] Allocating memory...\n"); 
+    for (int card_index = 0; card_index < num_coprocessors; card_index++) {
+        int num_threads_mic = threads[card_index];
+        int tasks_begin_mic = deliver_begins[card_index];
+        int tasks_length_mic = deliver_lengths[card_index];
+
+        char *painting_board_r_mic = &(painting_board_r[tasks_begin_mic]);
+        char *painting_board_g_mic = &(painting_board_g[tasks_begin_mic]);
+        char *painting_board_b_mic = &(painting_board_b[tasks_begin_mic]);
+
+#pragma offload target(mic : card_index) signal(&(signals[card_index])) \
+        in(num_threads_mic) \
+        in(size_x, size_y, size_x_half, size_y_half, size_length, pixels_per_identity) \
+        inout(painting_board_r_mic : length(tasks_length_mic) alloc_if(1) free_if(0)) \
+        inout(painting_board_g_mic : length(tasks_length_mic) alloc_if(1) free_if(0)) \
+        inout(painting_board_b_mic : length(tasks_length_mic) alloc_if(1) free_if(0)) 
+        {
+        }
+    }
+    printf("[HOST] Done!\n"); 
+
+    free(signals); 
 }
+
+void mandelbrotAfterWorks(
+    long long  size_x,
+    long long  size_y,
+    long long  size_x_half,
+    long long  size_y_half,
+    long long  size_length,
+    PRECISION  pixels_per_identity,
+
+    int escape_limit,
+    PRECISION offset_z_real,
+    PRECISION offset_z_imag,
+
+    int num_coprocessors,
+    int total_threads,
+    int *threads,
+
+    long long *deliver_begins,
+    long long *deliver_lengths,
+
+    char *painting_board_r,
+    char *painting_board_g,
+    char *painting_board_b
+    ) {
+
+    int *signals;
+    signals = (int *)malloc(sizeof(int) * num_coprocessors);
+
+    printf("[HOST] Freeing memory...\n");
+    for (int card_index = 0; card_index < num_coprocessors; card_index++) {
+        int tasks_begin_mic = deliver_begins[card_index];
+        int tasks_length_mic = deliver_lengths[card_index];
+
+        char *painting_board_r_mic = &(painting_board_r[tasks_begin_mic]);
+        char *painting_board_g_mic = &(painting_board_g[tasks_begin_mic]);
+        char *painting_board_b_mic = &(painting_board_b[tasks_begin_mic]);
+
+#pragma offload target(mic : card_index) signal(&(signals[card_index])) \
+        out(painting_board_r_mic : length(tasks_length_mic) alloc_if(0) free_if(1)) \
+        out(painting_board_g_mic : length(tasks_length_mic) alloc_if(0) free_if(1)) \
+        out(painting_board_b_mic : length(tasks_length_mic) alloc_if(0) free_if(1)) 
+        {
+        }
+    }
+    printf("[HOST] Done!\n");
+
+    free(signals);
+}
+
 
 TARGET_ATTRIBUTE
 void mandelbrotDo(
@@ -57,9 +153,9 @@ void mandelbrotDo(
         in(size_x, size_y, size_x_half, size_y_half, size_length, pixels_per_identity) \
         in(escape_limit, offset_z_real, offset_z_imag) \
         in(tasks_begin_mic, tasks_length_mic) \
-        out(painting_board_r_mic : length(tasks_length_mic)) \
-        out(painting_board_g_mic : length(tasks_length_mic)) \
-        out(painting_board_b_mic : length(tasks_length_mic)) 
+        out(painting_board_r_mic : length(tasks_length_mic) alloc_if(0) free_if(0)) \
+        out(painting_board_g_mic : length(tasks_length_mic) alloc_if(0) free_if(0)) \
+        out(painting_board_b_mic : length(tasks_length_mic) alloc_if(0) free_if(0)) 
         {
             omp_set_num_threads(num_threads_mic);
 

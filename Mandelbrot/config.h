@@ -8,8 +8,8 @@
 
 #define ESCAPE 1000
 // The size 'd better be divisible by 2. 
-#define PAINT_WIDTH 1920*4
-#define PAINT_HEIGH 1080*4
+#define PAINT_WIDTH 1920*8
+#define PAINT_HEIGH 1080*8
 
 // If you have higher precision then use it, double have it's own limit. 
 #define PRECISION double 
@@ -17,6 +17,6 @@
 #define OFFSET_REAL -1.7687788
 #define OFFSET_IMAG -0.0017389
 
-#define PIXELS_PER_IDENTITY 4000000000*8*8*2ll
+#define PIXELS_PER_IDENTITY 4000000000*8*8*4ll
 
 #define SAVING_PATH "./MANDELBROT.bmp"

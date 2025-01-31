@@ -74,7 +74,7 @@ int main() {
     unsigned long transfer_start_millisecond, transfer_end_millisecond;
     double transfer_duration_millisecond;
 
-    // Get number of threads of each card
+    // Get number of threads on each card
     for (int card_index = 0; card_index < num_coprocessors; card_index++) {
         int *temp_threads = &(threads[card_index]); 
 #pragma offload target(mic : card_index) signal(&(signals[card_index])) \
@@ -100,6 +100,33 @@ int main() {
         //printf("[MIC%d] begin at task: %d\n", card_index, deliver_begins[card_index]);
         printf("[MIC%d] delivered tasks: %d\n", card_index, deliver_lengths[card_index]);
     }
+
+
+    printf("[HOST] Start preworks...\n");
+
+    mandelbrotPreWorks(
+            size_x,
+            size_y,
+            size_x_half,
+            size_y_half,
+            size_length,
+            pixels_per_identity,
+
+            escape_limit,
+            offset_z_real,
+            offset_z_imag,
+
+            num_coprocessors,
+            total_threads,
+            threads,
+
+            deliver_begins,
+            deliver_lengths,
+
+            painting_board_r,
+            painting_board_g,
+            painting_board_b
+        );
 
     printf("[HOST] Now start calculation...\n"); 
 
@@ -139,6 +166,32 @@ int main() {
     printf("[HOST] Now saving picture...\n"); 
 
     writeBMP(painting_board_r, painting_board_g, painting_board_b, saving_path, size_y, size_x);
+
+    printf("[HOST] Now do afterworks...\n");
+
+    mandelbrotAfterWorks(
+            size_x,
+            size_y,
+            size_x_half,
+            size_y_half,
+            size_length,
+            pixels_per_identity,
+
+            escape_limit,
+            offset_z_real,
+            offset_z_imag,
+
+            num_coprocessors,
+            total_threads,
+            threads,
+
+            deliver_begins,
+            deliver_lengths,
+
+            painting_board_r,
+            painting_board_g,
+            painting_board_b
+        );
 
     free(painting_board_r);
     free(painting_board_g);

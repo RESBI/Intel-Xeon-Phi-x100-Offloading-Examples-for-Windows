@@ -1,5 +1,41 @@
-﻿Build started 13/10/2024 21:06:03.
+﻿Build started 18/01/2025 03:57:22.
+     1>Project "C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\Mandelbrot\Mandelbrot.vcxproj" on node 3 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017\windows\bin\Intel64\icl.exe /c /Qm64 /I"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\include" /Zi /nologo /W3 /O2 /Oi /Qipo /D __INTEL_COMPILER=1700 /D _WINHOST /D SINGLE_PREC /D _MBCS /D _MBCS /EHsc /MD /GS /Gy /Qoffload-option,mic,compiler,"\"-IC:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\include\"" /Zc:wchar_t /Zc:forScope /Qopenmp /Fo"x64\Release\Mandelbrot\\" /Fd"x64\Release\Mandelbrot\vc140.pdb" /TC /Qdiag-disable:10373 main.c
+         main.c
+     1>main.c(107): warning #266: function "mandelbrotPreWorks" declared implicitly
+               mandelbrotPreWorks(
+               ^
+         
+     1>main.c(172): warning #266: function "mandelbrotAfterWorks" declared implicitly
+               mandelbrotAfterWorks(
+               ^
+         
+     1>main.c(107): warning #266: *MIC* function "mandelbrotPreWorks" declared implicitly
+               mandelbrotPreWorks(
+               ^
+         
+     1>main.c(133): warning #266: *MIC* function "GetTickCount" declared implicitly
+               transfer_start_millisecond = GetTickCount();
+                                            ^
+         
+     1>main.c(172): warning #266: *MIC* function "mandelbrotAfterWorks" declared implicitly
+               mandelbrotAfterWorks(
+               ^
+         
+       Link:
+         C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017\windows\bin\Intel64\xilink.exe -qm64 /OUT:"C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\Mandelbrot\x64\Release\x86_64\Mandelbrot.exe" /NOLOGO /LIBPATH:"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\intel64" mkl_intel_lp64.lib mkl_intel_thread.lib mkl_core.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /manifest:embed /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\Mandelbrot\x64\Release\x86_64\Mandelbrot.pdb" /OPT:REF /OPT:ICF /qoffload-ldopts="\"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\mic\libmkl_intel_lp64.a\" \"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\mic\libmkl_intel_thread.a\" \"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\mic\libmkl_core.a\" -lpthread" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\Mandelbrot\x64\Release\x86_64\Mandelbrot.lib" /MACHINE:X64 x64\Release\Mandelbrot\main.obj
+         x64\Release\Mandelbrot\mandelbrot.obj
+         x64\Release\Mandelbrot\utils.obj
+     1>ipo: : warning #11021: *MIC* unresolved writeBMP
+                 Referenced in C:/Users/ADMINI~1/AppData/Local/Temp/2/ipo_87084.o
+     1>ipo: : warning #11021: *MIC* unresolved GetTickCount
+                 Referenced in C:/Users/ADMINI~1/AppData/Local/Temp/2/ipo_87084.o
+     1>ipo: : warning #11021: *MIC* unresolved deliveringTasks
+                 Referenced in C:/Users/ADMINI~1/AppData/Local/Temp/2/ipo_87084.o
+         Mandelbrot.vcxproj -> C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\Mandelbrot\x64\Release\x86_64\Mandelbrot.exe
+     1>Done Building Project "C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\Mandelbrot\Mandelbrot.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.18
+Time Elapsed 00:00:02.22
