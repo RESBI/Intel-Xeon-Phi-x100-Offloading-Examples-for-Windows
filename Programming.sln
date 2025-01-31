@@ -13,6 +13,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameOfLofe", "GameOfLofe\Ga
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NBody-Particle", "NBody-Particle\NBody-Particle.vcxproj", "{82767692-5319-4C90-8EDE-5700E4CCEA6D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48E62F67-AAEF-4D70-BEAF-69AD01106285}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
