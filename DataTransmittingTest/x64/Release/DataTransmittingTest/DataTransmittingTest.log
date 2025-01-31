@@ -1,5 +1,29 @@
-﻿Build started 13/10/2024 21:06:03.
+﻿Build started 31/01/2025 18:48:42.
+     1>Project "C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\DataTransmittingTest\DataTransmittingTest.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017\windows\bin\Intel64\icl.exe /c /Qm64 /I"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\include" /Zi /nologo /W3 /Ox /Oi /Qipo /D __INTEL_COMPILER=1700 /D _WINHOST /D SINGLE_PREC /D _MBCS /D _MBCS /EHsc /MD /GS /Gy /Qoffload-option,mic,compiler,"\"-IC:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\include\"" /Zc:wchar_t /Zc:forScope /Qopenmp /Fo"x64\Release\DataTransmittingTest\\" /Fd"x64\Release\DataTransmittingTest\vc140.pdb" /TC /Qdiag-disable:10373 main.c
+         main.c
+     1>main.c(126): warning #61: integer operation result is out of range
+               unsigned long data_size = 2 * 1024 * 1024 * 1024; // 2 GB, Can't bigger than 3 GB
+                                                         ^
+         
+     1>main.c(126): warning #61: *MIC* integer operation result is out of range
+               unsigned long data_size = 2 * 1024 * 1024 * 1024; // 2 GB, Can't bigger than 3 GB
+                                                         ^
+         
+     1>main.c(156): warning #266: *MIC* function "GetTickCount" declared implicitly
+                   transfer_start_millisecond = GetTickCount(); 
+                                                ^
+         
+       Link:
+         C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017\windows\bin\Intel64\xilink.exe -qm64 /OUT:"C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\DataTransmittingTest\x64\Release\x86_64\DataTransmittingTest.exe" /NOLOGO /LIBPATH:"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\intel64" mkl_intel_lp64.lib mkl_intel_thread.lib mkl_core.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /manifest:embed /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\DataTransmittingTest\x64\Release\x86_64\DataTransmittingTest.pdb" /OPT:REF /OPT:ICF /qoffload-ldopts="\"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\mic\libmkl_intel_lp64.a\" \"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\mic\libmkl_intel_thread.a\" \"C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\mkl\lib\mic\libmkl_core.a\" -lpthread" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\DataTransmittingTest\x64\Release\x86_64\DataTransmittingTest.lib" /MACHINE:X64 x64\Release\DataTransmittingTest\main.obj
+     1>ipo: : warning #11021: *MIC* unresolved GetTickCount
+                 Referenced in C:/Users/ADMINI~1/AppData/Local/Temp/2/ipo_129164.o
+     1>ipo: : warning #11021: *MIC* unresolved dataGen
+                 Referenced in C:/Users/ADMINI~1/AppData/Local/Temp/2/ipo_129164.o
+         DataTransmittingTest.vcxproj -> C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\build\DataTransmittingTest\x64\Release\x86_64\DataTransmittingTest.exe
+     1>Done Building Project "C:\Users\Administrator\Desktop\Phi x100\Programming\Programming\DataTransmittingTest\DataTransmittingTest.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:02.14

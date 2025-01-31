@@ -22,7 +22,7 @@
 #include <windows.h>
 #endif
 
-/*
+
 #ifdef __linux__
 #define MALLOC_ALIGNED aligned_alloc
 #else
@@ -30,7 +30,7 @@
 #define _mm_malloc(a, b) _aligned_malloc(a, b)
 #endif
 #define ALIGNMENT_SIZE 32
-*/
+
 
 #define SUM_TYPE unsigned int
 
@@ -46,7 +46,7 @@ uint64_t getMicroseconds() {
 
 char *dataGen(unsigned long data_size) {
     //char *data = (char *)MALLOC_ALIGNED(ALIGNMENT_SIZE, sizeof(char) * data_size);
-    char *data = (char *)malloc(sizeof(char) * data_size);
+    char *data = (char *)_mm_malloc(sizeof(char) * data_size, 64);
     srand(time(NULL)); 
 
     omp_set_num_threads(kmp_get_affinity_max_proc());
@@ -189,6 +189,6 @@ int main() {
         }
     }
 
-    free(data);
+    _mm_free(data);
     return 0; 
 }
