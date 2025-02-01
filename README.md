@@ -36,7 +36,7 @@ A program drawing mandelbrot set, support multi Phi calculation.
 
 ## `llama2.knc.c` 
 
-Offload layers to Phi using llama2.c. See [this repo](https://github.com/RESBI/llama2.knc.c).
+Offloading layers of Llama2 models to Phi using llama2.c. See [this repo](https://github.com/RESBI/llama2.knc.c).
 
 ![](https://github.com/RESBI/llama2.knc.c/raw/master/itruns.png)
 
