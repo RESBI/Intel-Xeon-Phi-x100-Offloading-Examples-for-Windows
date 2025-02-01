@@ -34,6 +34,12 @@ A program drawing mandelbrot set, support multi Phi calculation.
 
 ![](Mandelbrot/mandelbrot_screenshot_0.png)
 
+## `llama2.knc.c` 
+
+Offload layers to Phi using llama2.c. See [this repo](https://github.com/RESBI/llama2.knc.c).
+
+![](https://github.com/RESBI/llama2.knc.c/raw/master/itruns.png)
+
 ## `NBody-Particle`
 
 Todo...
@@ -43,6 +49,8 @@ Todo...
 Todo...
 
 ## `MeshSolver`
+
+Todo...
 
 # References
 - \[doc.-1\] [High Performance Computing Pearls Vol.1 and Vol.2](https://www.amazon.com/High-Performance-Parallelism-Pearls-One/dp/0128021187)
