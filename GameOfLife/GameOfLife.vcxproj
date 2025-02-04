@@ -18,9 +18,9 @@
     <ClCompile Include="main.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CE93C81C-0A4D-471D-B5C8-E0ABA2FB4666}</ProjectGuid>
+    <ProjectGuid>{82704A0A-51D2-4BD5-891C-609F5375B4ED}</ProjectGuid>
     <RootNamespace>GameOfLife</RootNamespace>
-    <ProjectName>Mandelbrot</ProjectName>
+    <ProjectName>GameOfLife</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
