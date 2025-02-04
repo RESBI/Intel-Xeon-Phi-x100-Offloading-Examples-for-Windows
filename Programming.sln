@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mandelbrot", "Mandelbrot\Ma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataTransmittingTest", "DataTransmittingTest\DataTransmittingTest.vcxproj", "{6C9916A9-9CD5-4B64-B696-07D5BEE63091}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameOfLofe", "GameOfLofe\GameOfLofe.vcxproj", "{740A579B-E2CE-49C9-982D-93671925B5A8}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NBody-Particle", "NBody-Particle\NBody-Particle.vcxproj", "{82767692-5319-4C90-8EDE-5700E4CCEA6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48E62F67-AAEF-4D70-BEAF-69AD01106285}"
@@ -43,12 +41,6 @@ Global
 		{6C9916A9-9CD5-4B64-B696-07D5BEE63091}.Release|x64.Build.0 = Release|x64
 		{6C9916A9-9CD5-4B64-B696-07D5BEE63091}.Release-knllb|x64.ActiveCfg = Release-knllb|x64
 		{6C9916A9-9CD5-4B64-B696-07D5BEE63091}.Release-knllb|x64.Build.0 = Release-knllb|x64
-		{740A579B-E2CE-49C9-982D-93671925B5A8}.Debug|x64.ActiveCfg = Debug|x64
-		{740A579B-E2CE-49C9-982D-93671925B5A8}.Debug|x64.Build.0 = Debug|x64
-		{740A579B-E2CE-49C9-982D-93671925B5A8}.Release|x64.ActiveCfg = Release|x64
-		{740A579B-E2CE-49C9-982D-93671925B5A8}.Release|x64.Build.0 = Release|x64
-		{740A579B-E2CE-49C9-982D-93671925B5A8}.Release-knllb|x64.ActiveCfg = Release-knllb|x64
-		{740A579B-E2CE-49C9-982D-93671925B5A8}.Release-knllb|x64.Build.0 = Release-knllb|x64
 		{82767692-5319-4C90-8EDE-5700E4CCEA6D}.Debug|x64.ActiveCfg = Debug|x64
 		{82767692-5319-4C90-8EDE-5700E4CCEA6D}.Debug|x64.Build.0 = Debug|x64
 		{82767692-5319-4C90-8EDE-5700E4CCEA6D}.Release|x64.ActiveCfg = Release|x64
