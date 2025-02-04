@@ -1,6 +1,5 @@
 /*
-    Visual Stuido Project Template For Xeon Phi Offloading Programs.
-    Extracted From Official Tutorials.
+    To test avaliable Phis on your rig. 
     2024/10/11, Resbi. 
 */
 #include <stdio.h>

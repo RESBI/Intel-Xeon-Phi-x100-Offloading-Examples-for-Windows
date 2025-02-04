@@ -1,12 +1,9 @@
 /*
-    Visual Stuido Project Template For Xeon Phi Offloading Programs.
-    Extracted From Official Tutorials.
-    2024/10/11, Resbi. 
-
     Mandelbrot Drawing Program, Could be accelerated by multiple Xeon Phi x100 Coprocessors.
     Todo:
         Dynamically split tasks according to performance. 
         Generate animation, or at least frames. 
+	2024/10/11, Resbi.
 */
 #include <stdio.h>
 #include <stdlib.h>

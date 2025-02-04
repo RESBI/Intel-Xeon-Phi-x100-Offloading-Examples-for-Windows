@@ -1,8 +1,4 @@
 /*
-    Visual Stuido Project Template For Xeon Phi Offloading Programs.
-    Extracted From Official Tutorials.
-    2024/10/11, Resbi. 
-
     Data Transmitting Test.
     Goal: 
         Test data completeness
@@ -12,6 +8,7 @@
         Test data transmitting speed
             1, Host -> Card
             2, Card -> Host
+    2024/10/11, Resbi. 
 */
 #include <stdio.h>
 #include <stdlib.h>
