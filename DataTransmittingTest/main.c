@@ -6,14 +6,20 @@
             2, transmit data to Phi and checksum
 
         Test data transmitting speed
-            1, Host -> Card
-            2, Card -> Host
+            1, Host -> Card for 10 times
+
+        Test kernel time cost
+            0, set data size
+            1, Host -> Card for 100 times
+            2, check time, estimate speed, check with theoretical speed. 
+            3, calculate the kernel time cost. 
     2024/10/11, Resbi. 
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <offload.h>
 #include <omp.h>
+
 #include <time.h>
 #ifndef __linux__
 #include <windows.h>
@@ -31,7 +37,9 @@
 
 #define SUM_TYPE unsigned int
 
-#define TRANSFER_LOOP_TIMES 10; 
+#define DATA_SIZE_STEP 64 * 1024 * 1024; // 64 MB
+#define TRANSFER_LOOP_TIMES 100; 
+#define TRANSFER_LOOP_SMALL 100; 
 
 /*
 uint64_t getMicroseconds() {
@@ -121,10 +129,14 @@ SUM_TYPE getSum(unsigned long data_size, char *data) {
 int main() {
     // Start your codes here... 
     unsigned long data_size = 2 * 1024 * 1024 * 1024; // 2 GB, Can't bigger than 3 GB
+    unsigned long data_size_small = 0; 
+    double speed; 
+    double speed_small; 
     char *data; 
     SUM_TYPE data_sum;
     int num_coprocs = _Offload_number_of_devices();
     int transfer_loop_times = TRANSFER_LOOP_TIMES; 
+    int transfer_loop_times_small = TRANSFER_LOOP_SMALL;
     int sig; 
 
     printf("[HOST] %d Coprocessors detected!\n", num_coprocs); 
@@ -147,7 +159,7 @@ int main() {
         }
 //#pragma offload_wait target(mic : card_index) wait(&sig)
 
-        printf("[HOST] Transferring data to mic%d for %d times...\n", card_index, transfer_loop_times);
+        printf("[HOST] Transferring %u MB data to mic%d for %d times...\n", data_size / 1024 / 1024, card_index, transfer_loop_times);
 
         // GetTickCount only works on Windows
         transfer_start_millisecond = GetTickCount(); 
@@ -160,10 +172,11 @@ int main() {
         }
         transfer_end_millisecond = GetTickCount();
         transfer_duration_millisecond = (transfer_end_millisecond - transfer_start_millisecond) / transfer_loop_times; 
+        speed = (data_size / 1024 / 1024) / (transfer_duration_millisecond / 1000); 
 
         printf("[HOST] Done!\n");
         printf("[HOST] Cost : %.3f seconds\n", transfer_duration_millisecond / 1000);
-        printf("[HOST] Speed: %.3f MiB/s\n", (data_size / 1024 / 1024) / (transfer_duration_millisecond / 1000));
+        printf("[HOST] Speed: %.3f MiB/s\n", speed);
 
         printf("[HOST] Now begin checksum on mic%d...\n", card_index); 
 
@@ -172,7 +185,7 @@ int main() {
         in(card_index) \
         in(data_size) \
         out(temp_data_sum) \
-        in(data : length(data_size) alloc_if(0) free_if(1))
+        in(data : length(data_size) alloc_if(0) free_if(0))
         {
            temp_data_sum = getSum(data_size, data);
            printf("[MIC%d] data sum = %u\n", card_index, temp_data_sum);
@@ -184,7 +197,37 @@ int main() {
         else {
             printf("[HOST] Datasum disagree!\n");
         }
+            
+        /*
+        // Test kernel time cost
+		printf("[HOST] Testing kernel time cost...\n");
+        for (int small_data_test_index = 0; small_data_test_index < 10; small_data_test_index++) {
+            data_size_small += DATA_SIZE_STEP;
+            printf("[HOST] Transferring %u MB data to mic%d for %d times...\n", data_size_small / 1024 / 1024, card_index, transfer_loop_times_small);
+
+            transfer_start_millisecond = GetTickCount(); 
+			for (int index_transfer_times = 0; index_transfer_times < transfer_loop_times_small; index_transfer_times++) {
+    #pragma offload target(mic : card_index) signal(&sig) \
+            in(data : length(data_size_small) alloc_if(0) free_if(0))
+                {
+                }
+            }
+#pragma offload_wait target(mic : card_index) wait(&sig)
+            transfer_end_millisecond = GetTickCount();
+            transfer_duration_millisecond = (transfer_end_millisecond - transfer_start_millisecond) / transfer_loop_times_small; 
+            speed_small = (data_size_small / 1024 / 1024) / (transfer_duration_millisecond / 1000); 
+            
+            printf("[HOST] \tCost : %.3f seconds\n", transfer_duration_millisecond / 1000);
+            printf("[HOST] \tSpeed: %.3f MiB/s\n", speed_small);
+        }
+        */
+    #pragma offload target(mic : card_index) signal(&sig) \
+        nocopy(data : alloc_if(0) free_if(1))
+            {
+            }
     }
+
+
 
     _mm_free(data);
     return 0; 
