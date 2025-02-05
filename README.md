@@ -38,7 +38,7 @@ A program drawing mandelbrot set, support multi Phi calculation.
 
 Offloading layers of Llama2 models to Phi using llama2.c. See [this repo](https://github.com/RESBI/llama2.knc.c).
 
-![](https://github.com/RESBI/llama2.knc.c/raw/master/pics/itrunsfaster.gif)
+![](https://github.com/RESBI/llama2.knc.c/raw/master/pics/itrunsmuchfaster.gif)
 
 ## `NBody-Particle`
 
